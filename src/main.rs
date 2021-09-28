@@ -1,9 +1,17 @@
 use std::{env, process, fs, io};
+use std::io::Write;
 
 fn print_file(file_name: &String) {
-    match fs::read_to_string(file_name) {
+    match fs::read(file_name) {
         Ok(content) => {
-            print!("{}", content);
+            match io::stdout().write_all(&content) {
+                Err(err) => {
+                    println!("Could not write to stdout {}", err);
+                    process::exit(1);
+                },
+                _ => {}
+            }
+
         },
         Err(err) => {
             println!("Could not read file {}", err);
