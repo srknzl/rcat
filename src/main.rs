@@ -1,8 +1,10 @@
 use std::{env, process, fs, io};
 use std::io::Write;
 
-fn print_file(file_name: &String) {
-    match fs::read(file_name) {
+/// Reads content of a file named with path file_path and writes
+/// the content to stdout. If an error occurs, the process exits.
+fn print_file(file_path: &String) {
+    match fs::read(file_path) {
         Ok(content) => {
             match io::stdout().write_all(&content) {
                 Err(err) => {
