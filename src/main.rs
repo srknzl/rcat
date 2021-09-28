@@ -1,13 +1,13 @@
 use std::{env, process, fs, io};
 
 fn main() {
-    let args : Vec<String> = env::args().skip(1).collect();
+    let args : Vec<String> = env::args().collect();
 
     let number_of_args = args.len();
 
     match number_of_args {
-        1 => {
-            let file_name = &args[0];
+        2 => {
+            let file_name = &args[1];
 
             match fs::read_to_string(file_name) {
                 Ok(content) => {
@@ -19,7 +19,7 @@ fn main() {
                 }
             }
         },
-        0 => {
+        1 => {
             loop {
                 let mut str: String = String::new();
                 match io::stdin().read_line(&mut str) {
@@ -33,7 +33,7 @@ fn main() {
             }
         },
         _ => {
-            println!("Usage <program> [filename]");
+            println!("Usage {} [filename]", &args[0]);
             process::exit(1);
         }
     }
