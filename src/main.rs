@@ -1,25 +1,23 @@
 use std::{env, process, fs, io};
 
+fn print_file(file_name: &String) {
+    match fs::read_to_string(file_name) {
+        Ok(content) => {
+            print!("{}", content);
+        },
+        Err(err) => {
+            println!("Could not read file {}", err);
+            process::exit(1);
+        }
+    }
+}
+
 fn main() {
     let args : Vec<String> = env::args().collect();
 
     let number_of_args = args.len();
 
     match number_of_args {
-        // Print contents of the file to stdout
-        2 => {
-            let file_name = &args[1];
-
-            match fs::read_to_string(file_name) {
-                Ok(content) => {
-                    print!("{}", content);
-                },
-                Err(err) => {
-                    println!("Could not read file {}", err);
-                    process::exit(1);
-                }
-            }
-        },
         // Echo mode. Write std input to std output
         1 => {
             loop {
@@ -39,10 +37,11 @@ fn main() {
                 }
             }
         },
-        // Wrong usage, print usage and exit
+        // Concatenate all files' contents and print to stdout
         _ => {
-            println!("Usage {} [filename]", &args[0]);
-            process::exit(1);
+            for arg in env::args().skip(1) {
+                print_file(&arg);
+            }
         }
     }
 }
