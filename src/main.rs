@@ -33,7 +33,7 @@ fn main() {
             }
         },
         _ => {
-            println!("Expected one argument, given {}", args.len());
+            println!("Usage <program> [filename]");
             process::exit(1);
         }
     }
