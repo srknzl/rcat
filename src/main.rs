@@ -25,13 +25,18 @@ fn main() {
             loop {
                 let mut str: String = String::new();
                 match io::stdin().read_line(&mut str) {
-                    Ok(_) => {},
+                    Ok(n) => {
+                        // EOF
+                        if n == 0 {
+                            process::exit(0);
+                        }
+                        print!("{}", str);
+                    },
                     Err(err) => {
                         println!("Cannot read input {}", err);
                         process::exit(1);
                     }
                 }
-                print!("{}", str);
             }
         },
         // Wrong usage, print usage and exit
