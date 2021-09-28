@@ -30,6 +30,7 @@ fn main() {
         1 => {
             loop {
                 let mut str: String = String::new();
+                // Use read line to echo for every newline user enters
                 match io::stdin().read_line(&mut str) {
                     Ok(n) => {
                         // EOF
