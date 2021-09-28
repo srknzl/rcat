@@ -6,6 +6,7 @@ fn main() {
     let number_of_args = args.len();
 
     match number_of_args {
+        // Print contents of the file to stdout
         2 => {
             let file_name = &args[1];
 
@@ -19,6 +20,7 @@ fn main() {
                 }
             }
         },
+        // Echo mode. Write std input to std output
         1 => {
             loop {
                 let mut str: String = String::new();
@@ -32,6 +34,7 @@ fn main() {
                 print!("{}", str);
             }
         },
+        // Wrong usage, print usage and exit
         _ => {
             println!("Usage {} [filename]", &args[0]);
             process::exit(1);
