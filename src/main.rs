@@ -24,7 +24,6 @@ fn print_file(file_path: &String) {
 
 fn main() {
     let args : Vec<String> = env::args().collect();
-
     let number_of_args = args.len();
 
     match number_of_args {
